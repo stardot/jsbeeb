@@ -62,7 +62,6 @@ function getPlugins() {
             template: "index.html",
         }),
         new HtmlWebpackPlugin({
-            title: "",
             template: "play.php",
             filename: "play.php",
         }),
