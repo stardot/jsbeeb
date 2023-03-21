@@ -1,9 +1,84 @@
 <!DOCTYPE html>
+<?php
+// Added for bbcmicro.co.uk
+require_once('../includes/config.php');
+require_once('../includes/db_connect.php');
+require_once('../includes/menu.php');
+$bgcolour = "";
+$fgcolour = "#fff";
+$key_controls = "";
+if (isset($_GET['bg'])) {
+  switch ($_GET['bg']) {
+   case "black":
+     $bgcolour = "#000";
+     $fgcolour = "#fff";
+     break;
+   case "white":
+     $bgcolour = "#fff";
+     $fgcolour = "#000";
+     break;
+  }
+}
+if (isset($_GET['disc'])) {
+  $discid = preg_replace('/^.+gameimg\/discs\/(\d+)\/.+$/', '$1', $_GET['disc']);
+  if (is_numeric($discid)) {
+    $sql = "select g.id, g.title_article, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+    $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->bindParam(1, $discid, PDO::PARAM_INT);
+    if ($sth->execute()) {
+      $game = $sth->fetch();
+    }
+    $sql = "select * from game_keys where gameid  = ? order by rel_order";
+    $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->bindParam(1, $discid, PDO::PARAM_INT);
+    if ($sth->execute()) {
+      $keys = $sth->fetchAll();
+    } else {
+      echo "Error:";
+      echo "\n";
+      $sth->debugDumpParams ();
+      $keys=array();
+    }
+  }
+}
+if (isset($game) && $game) {
+  if (strlen($game["title_article"]) > 0) {
+    $ta=$game["title_article"].' ';
+  } else {
+    $ta='';
+  }
+  $key_controls = "<p class='gameDetails'>" . $ta . $game["title"] . " (" . $game["year"] . ") - <a href=\"/game.php?id=" . $game["id"] . "\">See game details</a></p>";
+  if ($keys && count($keys) > 0) {
+    $key_controls .= "<p class='gameDetails'>Key controls:&nbsp;";
+    foreach ($keys as $key) {
+      $key_controls .= " <strong>" . $key["keyname"] . "</strong>&mdash;" . $key["keydescription"] . "&nbsp; ";
+    }
+  }
+}
+  // End of addition
+
+// End of addition
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Added for bbcmicro.co.uk -->
+    <title><?php echo $site_name ?> - Play</title>
+    <link rel="shortcut icon" href="../favicon.ico" />
+    <?php if ($bgcolour !== "") { echo "<style>body { background-color: $bgcolour !important; }</style>"; } ?>
+    <style>
+      #leds { display: none; }
+      .gameDetails { text-align: center; color: <?php echo $fgcolour ?>; }
+      .gameDetails a { color: #9d9d9d; }
+      .gameDetails a:hover { color: <?php echo $fgcolour ?>; }
+      .nav-item.active > a { color: #fff; }
+    </style>
+    <!-- End of addition -->
+
+    <!-- Removed for bbcmicro.co.uk
     <meta name="author" content="Matt Godbolt" />
     <meta name="description" content="A Javascript BBC Micro emulator" />
     <meta
@@ -30,9 +105,38 @@
       ga("create", "UA-55180-8", "godbolt.org");
       ga("send", "pageview");
     </script>
+    -->
   </head>
 
   <body>
+    <!-- Added for bbcmicro.co.uk -->
+    <nav id="header-bar" class="navbar navbar-dark bg-dark navbar-expand-lg not-electron" role="navigation">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.php"><?php echo $site_name ?></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item active"><a class="nav-link" href="../index.php">Games</a></li>
+            <li class="nav-item"><a class="nav-link" href="../about.php">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="../links.php">Links</a></li>
+            <li class="nav-item"><a class="nav-link" href="../contact.php">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End of addition -->
+
+    <!-- Removed for bbcmicro.co.uk
     <nav id="header-bar" class="navbar navbar-dark bg-dark navbar-expand-lg not-electron" role="navigation">
       <div class="container-fluid">
         <a class="navbar-brand" href="https://bbc.godbolt.org/" target="_top">jsbeeb</a>
@@ -167,6 +271,7 @@
         </div>
       </div>
     </nav>
+    -->
 
     <div id="audio-warning" class="alert alert-warning initially-hidden">
       Your browser has suspended audio -- mouse click or key press for sound.
@@ -175,6 +280,16 @@
     <div>
       <div id="outer">
         <div id="cub-monitor">
+          <!-- Added for bbcmicro.co.uk -->
+          <img
+            id="cub-monitor-pic"
+            width="896"
+            height="648"
+            src="images/placeholder.png"
+            alt="A fake CUB computer monitor"
+          />
+          <!-- End of addition -->
+          <!-- Removed for bbcmicro.co.uk
           <img
             id="cub-monitor-pic"
             width="896"
@@ -183,11 +298,21 @@
             alt="A fake CUB computer monitor"
           />
           <div class="sidebar left"><img src="images/placeholder.png" alt="" /></div>
+          -->
           <canvas id="screen" width="896" height="600"></canvas>
+          <!-- Removed for bbcmicro.co.uk
           <div class="sidebar right"><img src="images/placeholder.png" alt="" /></div>
           <div class="sidebar bottom"><img src="images/placeholder.png" alt="" /></div>
+          -->
         </div>
       </div>
+
+      <?php
+        // Added for bbcmicro.co.uk
+        echo $key_controls;
+        // End of addition
+      ?>
+
       <div id="leds">
         <table>
           <thead>

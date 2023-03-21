@@ -49,6 +49,9 @@ function getPlugins() {
                 {
                     from: "music5000-worklet.js",
                 },
+                {
+                    from: "images/placeholder*.png",
+                },
             ],
         }),
         new MiniCssExtractPlugin({
@@ -57,6 +60,11 @@ function getPlugins() {
         new HtmlWebpackPlugin({
             title: "jsbeeb - Javascript BBC Micro emulator",
             template: "index.html",
+        }),
+        new HtmlWebpackPlugin({
+            title: "",
+            template: "play.php",
+            filename: "play.php",
         }),
     ];
 }
