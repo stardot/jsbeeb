@@ -109,37 +109,14 @@ if (isset($game) && $game) {
   </head>
 
   <body>
-    <!-- Added for bbcmicro.co.uk -->
     <nav id="header-bar" class="navbar navbar-dark bg-dark navbar-expand-lg not-electron" role="navigation">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.php"><?php echo $site_name ?></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item active"><a class="nav-link" href="../index.php">Games</a></li>
-            <li class="nav-item"><a class="nav-link" href="../about.php">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="../links.php">Links</a></li>
-            <li class="nav-item"><a class="nav-link" href="../contact.php">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End of addition -->
-
-    <!-- Removed for bbcmicro.co.uk
-    <nav id="header-bar" class="navbar navbar-dark bg-dark navbar-expand-lg not-electron" role="navigation">
-      <div class="container-fluid">
+        <!-- Added for bbcmicro.co.uk -->
+        <a class="navbar-brand" href="../index.php" target="_top"><?php echo $site_name ?></a>
+        <!-- End of addition -->
+        <!-- Removed for bbcmicro.co.uk
         <a class="navbar-brand" href="https://bbc.godbolt.org/" target="_top">jsbeeb</a>
+        -->
         <button
           class="navbar-toggler"
           type="button"
@@ -153,6 +130,13 @@ if (isset($game) && $game) {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav nav mb-2 mb-lg-0">
+            <!-- Added for bbcmicro.co.uk -->
+            <li class="nav-item active"><a class="nav-link" href="../index.php">Games</a></li>
+            <li class="nav-item"><a class="nav-link" href="../about.php">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="../links.php">Links</a></li>
+            <li class="nav-item"><a class="nav-link" href="../contact.php">Contact</a></li>
+            <!-- End of addition -->
+            <!-- Removed for bbcmicro.co.uk
             <li class="nav-item">
               <a href="#configuration" class="nav-link" data-bs-toggle="modal" data-bs-target="#configuration">
                 <span class="bbc-model">BBC B</span></a
@@ -253,7 +237,9 @@ if (isset($game) && $game) {
                 </li>
               </ul>
             </li>
+            -->
           </ul>
+          <!-- Removed for bbcmicro.co.uk
           <span class="navbar-text m-auto">
             Edit BBC BASIC interactively with Owlet at
             <a href="https://bbcmic.ro/" target="_blank">bbcmic.ro</a>!
@@ -268,10 +254,10 @@ if (isset($game) && $game) {
               aria-label="Search"
             />
           </form>
+          -->
         </div>
       </div>
     </nav>
-    -->
 
     <div id="audio-warning" class="alert alert-warning initially-hidden">
       Your browser has suspended audio -- mouse click or key press for sound.
@@ -297,13 +283,11 @@ if (isset($game) && $game) {
             src="images/cub-monitor.png"
             alt="A fake CUB computer monitor"
           />
-          <div class="sidebar left"><img src="images/placeholder.png" alt="" /></div>
           -->
+          <div class="sidebar left"><img src="images/placeholder.png" alt="" /></div>
           <canvas id="screen" width="896" height="600"></canvas>
-          <!-- Removed for bbcmicro.co.uk
           <div class="sidebar right"><img src="images/placeholder.png" alt="" /></div>
           <div class="sidebar bottom"><img src="images/placeholder.png" alt="" /></div>
-          -->
         </div>
       </div>
 
