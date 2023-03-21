@@ -112,7 +112,7 @@ if (isset($game) && $game) {
     <nav id="header-bar" class="navbar navbar-dark bg-dark navbar-expand-lg not-electron" role="navigation">
       <div class="container-fluid">
         <!-- Added for bbcmicro.co.uk -->
-        <a class="navbar-brand" href="../index.php" target="_top"><?php echo $site_name ?></a>
+        <a class="navbar-brand" href="../index.php" target="_top"><?php echo $site_name_html ?></a>
         <!-- End of addition -->
         <!-- Removed for bbcmicro.co.uk
         <a class="navbar-brand" href="https://bbc.godbolt.org/" target="_top">jsbeeb</a>
