@@ -69,13 +69,8 @@ if (isset($game) && $game) {
     <title><?php echo $site_name ?> - Play</title>
     <link rel="shortcut icon" href="../favicon.ico" />
     <?php if ($bgcolour !== "") { echo "<style>body { background-color: $bgcolour !important; }</style>"; } ?>
-    <style>
-      #leds { display: none; }
-      .gameDetails { text-align: center; color: <?php echo $fgcolour ?>; }
-      .gameDetails a { color: #9d9d9d; }
-      .gameDetails a:hover { color: <?php echo $fgcolour ?>; }
-      .nav-item.active > a { color: #fff; }
-    </style>
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/jsbeeb.css">
     <!-- End of addition -->
 
     <!-- Removed for bbcmicro.co.uk
