@@ -71,6 +71,10 @@ if (isset($game) && $game) {
     <?php if ($bgcolour !== "") { echo "<style>body { background-color: $bgcolour !important; }</style>"; } ?>
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/jsbeeb.css">
+    <style>
+      .gameDetails { color: <?php echo $fgcolour ?>; }
+      .gameDetails a:hover { color: <?php echo $fgcolour ?>; }
+    </style>
     <!-- End of addition -->
 
     <!-- Removed for bbcmicro.co.uk
@@ -105,8 +109,11 @@ if (isset($game) && $game) {
 
   <body>
     <nav id="header-bar" class="navbar navbar-dark bg-dark navbar-expand-lg not-electron" role="navigation">
+      <!-- Removed for bbcmicro.co.uk
       <div class="container-fluid">
-        <!-- Added for bbcmicro.co.uk -->
+      -->
+      <!-- Added for bbcmicro.co.uk -->
+      <div class="container">
         <a class="navbar-brand" href="../index.php" target="_top"><?php echo $site_name_html ?></a>
         <!-- End of addition -->
         <!-- Removed for bbcmicro.co.uk
@@ -250,6 +257,9 @@ if (isset($game) && $game) {
             />
           </form>
           -->
+          <!-- Added for bbcmicro.co.uk -->
+          <a href="/about.php"><img src="/css/BBC_Micro.png" class="bbc-micro-button" alt="BBC Micro"></a>
+          <!-- End of addition -->
         </div>
       </div>
     </nav>
