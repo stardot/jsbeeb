@@ -69,8 +69,8 @@ if (isset($game) && $game) {
     <title><?php echo $site_name ?> - Play</title>
     <link rel="shortcut icon" href="../favicon.ico" />
     <?php if ($bgcolour !== "") { echo "<style>body { background-color: $bgcolour !important; }</style>"; } ?>
-    <link rel="stylesheet" href="../css/custom.css">
-    <link rel="stylesheet" href="../css/jsbeeb.css">
+    <link rel="stylesheet" href="../css/custom.css?v=<?php echo CSSV ?>">
+    <link rel="stylesheet" href="../css/jsbeeb.css?v=<?php echo CSSV ?>">
     <style>
       .gameDetails { color: <?php echo $fgcolour ?>; }
       .gameDetails a:hover { color: <?php echo $fgcolour ?>; }
@@ -258,7 +258,7 @@ if (isset($game) && $game) {
           </form>
           -->
           <!-- Added for bbcmicro.co.uk -->
-          <a href="/about.php"><img src="/css/BBC_Micro.png" class="bbc-micro-button" alt="BBC Micro"></a>
+          <a href="/about.php"><img src="/css/BBC_Micro.png" class="bbc-micro-button" style="max-height: 40px;" alt="BBC Micro"></a>
           <!-- End of addition -->
         </div>
       </div>
